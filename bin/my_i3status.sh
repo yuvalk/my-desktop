@@ -16,6 +16,7 @@ i3status | (read line && echo "$line" && read line && echo "$line" && read line 
 do
   read line
   update_language
-  echo ",[{\"full_text\":\"${KBD}\" },${line#,\[}" || exit 1
+  first_vpn=$(nmcli con | grep -i vpn | head -n 1 | awk '{ print $1 }')
+  echo ",[{\"full_text\":\"${KBD}\" },{\"full_text\":\"VPN: ${first_vpn}\" },${line#,\[}" || exit 1
 done)
 
